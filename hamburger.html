@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let size = prompt('Выберите какую либо букву(a, b), где: a - большой гамбургера; b - маленький гамбургера');
+    let stuffing = prompt('Выберите какую либо букву(a, b, c), где: a - начинка с сыром; b - начинка с салом; c - с картофелем');
+    let topping = prompt('Выберите какую либо букву(a, b, c, d), где: a - приправа; b - майонез; c - приправа и майонез; d - выбора нет');
+    class Hamburger {
+
+        constructor(size, stuffing, topping) {
+            this.size = size;
+            this.stuffing = stuffing;
+            this.topping = topping;
+        }
+        getSize(size) {
+            let sizeHamburger = {};
+            if (size == 'a') {
+                sizeHamburger['price'] = 100;
+                sizeHamburger['calories'] = 40;
+            } else if (size == 'b') {
+                sizeHamburger['price'] = 50;
+                sizeHamburger['calories'] = 20;
+            }
+            return sizeHamburger;
+        }
+        getStuffing(stuffing) {
+            let stuffingHamburger = {};
+            if (stuffing == 'a') {
+                stuffingHamburger['price'] = 10;
+                stuffingHamburger['calories'] = 20;
+            } else if (stuffing == 'b') {
+                stuffingHamburger['price'] = 20;
+                stuffingHamburger['calories'] = 5;
+            } else if (stuffing == 'c') {
+                stuffingHamburger['price'] = 15;
+                stuffingHamburger['calories'] = 10;
+            }
+            return stuffingHamburger;
+        }
+        getTopping(topping) {
+            let toppingHamburger = {};
+            if (topping == 'a') {
+                toppingHamburger['price'] = 15;
+                toppingHamburger['calories'] = 0;
+            } else if (topping == 'b') {
+                toppingHamburger['price'] = 20;
+                toppingHamburger['calories'] = 5;
+            } else if (topping == 'c') {
+                toppingHamburger['price'] = 35;
+                toppingHamburger['calories'] = 5;
+            } else if (topping == 'c') {
+                toppingHamburger['price'] = 0;
+                toppingHamburger['calories'] = 0;
+            }
+            return toppingHamburger;
+        }
+
+        calculatePrice(size, stuffing, topping) {
+            let productHamburger = {};
+            productHamburger['sizeHamburger'] = this.getSize(size);
+            productHamburger['stuffingHamburger'] = this.getStuffing(stuffing);
+            productHamburger['toppingHamburger'] = this.getTopping(topping);
+            return Object.values(productHamburger).reduce((acc, { price }) => acc + price, 0);
+
+        }
+        calculateCalories() {
+            let productHamburger = {};
+            productHamburger['sizeHamburger'] = this.getSize(size);
+            productHamburger['stuffingHamburger'] = this.getStuffing(stuffing);
+            productHamburger['toppingHamburger'] = this.getTopping(topping);
+            return Object.values(productHamburger).reduce((acc, { calories }) => acc + calories, 0);
+        }
+    }
+    const hamburger = new Hamburger(size, stuffing, topping);
+    alert(`Цена гамбургера ${hamburger.calculatePrice(size, stuffing, topping)}, калорийность ${hamburger.calculateCalories(size, stuffing, topping)}`)
+
+</script>
+</body>
+</html>
