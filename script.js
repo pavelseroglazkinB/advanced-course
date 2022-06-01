@@ -9,13 +9,19 @@ const BASE_URL = "https://raw.githubusercontent.com/GeekBrainsTutorial/online-st
 const GOODS = `${BASE_URL}/catalogData.json`;
 const GOODS_BASKET = `${BASE_URL}//getBasket.json`;
 
-function service(url, callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.send();
-  xhr.onload = () => {
-    callback(JSON.parse(xhr.response));
-  }
+function service(url) {
+  return fetch(url)
+    .then((res) => res.json());
+  /*return new Promise((resolve) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.send();
+    xhr.onload = () => {
+      if (xhr.readyState === 4) {
+        resolve(JSON.parse(xhr.response));
+      }
+    }
+  })*/
 }
 
 class GoodsItem {
@@ -45,14 +51,21 @@ class GoodsItem {
 }
 class GoodsList {
   items = [];
-  fetchGoods(callback) {
-    service(GOODS, (data) => {
+  filteredItems = [];
+  fetchGoods() {
+    return service(GOODS).then((data) => {
       this.items = data;
-      callback()
-    });
+      this.filteredItems = data;
+      return data;
+    })
+  }
+  filter(str) {
+    this.filteredItems = this.items.filter(({ product_name }) => {
+      return (new RegExp(str, 'i')).test(product_name);
+    })
   }
   render() {
-    const goods = this.items.map(item => {
+    const goods = this.filteredItems.map(item => {
       const goodItem = new GoodsItem(item);
       return goodItem.render()
     }).join('');
@@ -66,11 +79,11 @@ class GoodsList {
 
 class BasketGood {
   items = [];
-  fetchData(callback = () => {}) {
-      service(GOODS_BASKET, (data) => {
-        this.items = data;
-        callback()
-      });
+  fetchData(callback = () => { }) {
+    service(GOODS_BASKET, (data) => {
+      this.items = data;
+      callback()
+    });
   }
 }
 
@@ -78,7 +91,12 @@ const basketGood = new BasketGood();
 basketGood.fetchData();
 
 const goodsList = new GoodsList();
-goodsList.fetchGoods(() =>{
+goodsList.fetchGoods().then(() => {
   goodsList.render();
 });
 
+document.querySelector('.search_img').addEventListener('click', () => {
+  const input = document.querySelector('.search_one');
+  goodsList.filter(input.value);
+  goodsList.render();
+});

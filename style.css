@@ -59,6 +59,73 @@ img {
 	justify-content: space-between;
 }
 
+
+.header_logo{
+	display : flex;
+	justify-content : space-between; /* выравнивание элементов вдоль главной оси*/
+}
+.logo{
+	color : #328F36;
+	font-size : 16px;
+	
+}
+.mode{
+	font-family: 'Open Sans';
+	color : #6BAE37;
+	margin-bottom :6px;
+}
+.bells{
+	font-family: 'Open Sans';
+	color : #6BAE37;
+	font-size : 16px;
+	margin-bottom :6px;
+}
+.numbers{
+	font-family: 'Open Sans';
+	margin-bottom :10px;
+}
+.header_logo_section:nth-child(even){
+	width : 55%;
+	display : flex;
+	flex-direction : column;
+}
+.search{
+	display : flex;
+	justify-content : space-between;
+}
+.telephone:last-child{	
+	align-self : center;
+}
+
+.telephone a {	
+	font: 14px Open Sans;
+	font-weight: Regular;
+	color: #fff;
+	padding: 8px 10px;
+	text-decoration: none;
+	display: block;
+}
+.search_one{	
+   width:100%;
+   background-color : #E3DFDD;
+   border-radius : 3px 0 0 3px;
+   border : 0;
+   font : 15px Open Sans;
+   color : #757575;
+   padding : 7px 20px;
+}
+.search_img{
+	background : url(images/search.png)no-repeat;
+    width : 34px;
+    height : 34px;
+	border : 0;
+}
+form{
+	width:170%;
+	display : flex;
+	justify-content : space-between;
+}
+
 .logo {
 	color: #328f36;
 	font-size: 18px;
