@@ -97,14 +97,6 @@ img {
 	align-self : center;
 }
 
-.telephone a {	
-	font: 14px Open Sans;
-	font-weight: Regular;
-	color: #fff;
-	padding: 8px 10px;
-	text-decoration: none;
-	display: block;
-}
 .search_one{	
    width:100%;
    background-color : #E3DFDD;
@@ -148,6 +140,56 @@ form{
 
 .cart img {
 	margin-right: 10px;
+}
+
+.header_logo_section {
+	position: relative;
+}
+
+.basket {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    top: 37px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.fa {
+	position: absolute;
+	right: 20px;
+}
+
+@media (min-width: 340px) {
+    .basket {
+        font-size: 16px;
+    }
+}
+@media (min-width: 552px) {
+    .basket {
+        width: 500px;
+    }
+}
+
+.basketRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
+}
+
+.basketHeader {
+    font-weight: bold;
+}
+
+.basketTotal {
+    font-weight: bold;
+    text-align: right;
 }
 
 /*--novelty-starts--*/
