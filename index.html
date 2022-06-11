@@ -12,6 +12,7 @@
    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
    <script src="script.js"></script>
 </head>
+
 <body>
    <div id="root">
       <div class="container">
@@ -46,30 +47,16 @@
                   </div>
                   <div class="search">
                      <form name="search" action="" method="get">
-                        <input class="search_one" type="text" name="q" value="" placeholder="Поиск"
-                           v-model="searchValue">
-                        <input type="submit" value="" class="search_img" name="submit">
+                        <search v-model="searchValue"></search>
                      </form>
                   </div>
                </div>
                <div class="header_logo_section">
                   <div class="cart">
                      <img src="images/basket.png">
-                     <button v-on:click="addEvent" class="cart-button" type="button">Корзина</button>
+                     <custom-button v-on:click="addEvent">Корзина</custom-button>
                   </div>
-                  <div class="basket hidden" v-if="isVisibleCart">
-                     <div v-on:click="del"><i class="fa fa-times"></i></div>
-                     <div class="basketRow basketHeader">
-                        <div>Название товара</div>
-                        <div>Количество</div>
-                        <div>Цена за шт.</div>
-                        <div>Итого</div>
-                     </div>
-                     <div class="basketTotal">
-                        Товаров в корзине на сумму:
-                        $<span class="basketTotalValue">0</span>
-                     </div>
-                  </div>
+                  <basket v-if="isVisibleCart" v-on:close="del"></basket>
                </div>
             </div>
          </header>
@@ -80,22 +67,10 @@
             <hr>
          </div>
          <div class="goods-list">
-            <div class="grid-item" v-for="item in filteredItems">
-               <div class="grid-img">
-                  <img src="images/26.jpg" width="300" height="300" alt="chandler">
-               </div>
-               <hr>
-               <div class="product_catalog">
-                  <div class="catalog-item">{{ item.product_name }}</div>
-                  <ul class="catalog-item">
-                     <li class="catalog-item_price"><b>{{ item.price }}</b> руб.</li>
-                     <li><a class="add-to-cart-link" href="cart/add?id=3"><img src="images/pannier.png"
-                              alt="pannier"></a></li>
-                  </ul>
-               </div>
-            </div>
+            <good v-for="item in filteredItems" :item="item"></good>
          </div>
       </div>
    </div>
 </body>
+
 </html>
