@@ -1,6 +1,6 @@
-const BASE_URL = "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses";
-const GOODS = `${BASE_URL}/catalogData.json`;
-const GOODS_BASKET = `${BASE_URL}//getBasket.json`;
+const BASE_URL = "https://localhost:8000/";
+const GOODS = `${BASE_URL}goods.json`;
+const GOODS_BASKET = `${BASE_URL}getBasket.json`;
 
 function service(url) {
   return fetch(url)
