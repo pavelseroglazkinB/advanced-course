@@ -1,4 +1,4 @@
-const BASE_URL = "https://localhost:8000/";
+const BASE_URL = "http://localhost:8000/";
 const GOODS = `${BASE_URL}goods.json`;
 const GOODS_BASKET = `${BASE_URL}getBasket.json`;
 
