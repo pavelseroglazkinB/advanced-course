@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <title>eShop</title>
+<html lang="ru">
 
+<head>
+   <title>eShop</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="style.css">
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+   <script src="script.js"></script>
 </head>
+
 <body>
-<header>
-   <button class="cart-button" type="button">Корзина</button>
-</header>
-<main>
-   <div class="goods-list"></div>
-</main>
-<script src="script.js"></script>
+   <div id="root">
+      <div class="container">
+         <h1 class="title">eShop {{ getCount }}</h1>
+         <header class="header">
+            <div class="header_menu">
+               <div class="header_section">
+                  <div class="header_item headerButton"><a href="#">О нас</a></div>
+                  <div class="header_item headerButton"><a href="#">Новости</a></div>
+                  <div class="header_item headerButton"><a href="#">Условия работы</a></div>
+                  <div class="header_item headerButton"><a href="#">Отзывы</a></div>
+                  <div class="header_item headerButton"><a href="#">Контакты</a></div>
+                  <div class="header_item headerButton"><a href="#">Статьи</a></div>
+               </div>
+            </div>
+            <div class="header_logo">
+               <div class="header_logo_section">
+                  <div class=""><a href="/"><img src="images/logo.png"></a></div>
+                  <a class="logo" href="">Саженцы цветов и<br>растений почтой</a>
+               </div>
+               <div class="header_logo_section">
+                  <div class="search">
+                     <div class="telephone">
+                        <p class="mode">РЕЖИМ РАБОТЫ</p>
+                        <p class="bells">звонки по телефону</p>
+                        <p class="numbers">ПН-ПТ 9:00-17:00</p>
+                     </div>
+                     <div class="telephone">
+                        <p class="mode">ПОЗВОНИТЕ НАМ</p>
+                        <p class="numbers">+7(978) 911-22-92</p>
+                     </div>
+                  </div>
+                  <div class="search">
+                     <form name="search" action="" method="get">
+                        <search v-model="searchValue"></search>
+                     </form>
+                  </div>
+               </div>
+               <div class="header_logo_section">
+                  <div class="cart">
+                     <img src="images/basket.png">
+                     <custom-button v-on:click="addEvent">Корзина</custom-button>
+                  </div>
+                  <basket v-if="isVisibleCart" v-on:close="del" v-for="item in basketGoodsItems" :item="item"></basket>
+               </div>
+            </div>
+         </header>
+      </div>
+      <div class="novelty  container">
+         <div class="catalog-slider">
+            <p>НОВИНКИ</p>
+            <hr>
+         </div>
+         <div class="goods-list">
+            <good v-for="item in filteredItems" :item="item"></good>
+         </div>
+      </div>
+   </div>
 </body>
+
 </html>
