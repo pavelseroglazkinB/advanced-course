@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:8000/";
 const GOODS = `${BASE_URL}goods.json`;
-const GOODS_BASKET = `${BASE_URL}getBasket.json`;
+const GOODS_BASKET = `${BASE_URL}basket`;
 
 function service(url) {
   return fetch(url)
@@ -28,21 +28,36 @@ window.onload = () => {
     `
   })
   Vue.component('basket', {
+    props: [
+      'item'
+    ],
+    data() {
+      return {
+        basketGoodsItems: []
+      }
+    },
     template: `
       <div class="basket hidden">
-        <div @click="$emit('close')"><i class="fa fa-times"></i></div>
+        <div @click="$emit('close')"><i class="fa fa-times delete"></i></div>
         <div class="basketRow basketHeader">
-           <div>Название товара</div>
-           <div>Количество</div>
-           <div>Цена за шт.</div>
-           <div>Итого</div>
+           <div>Название товара<p>{{ item.product_name }}</p></div>
+           <div>Количество<p>{{ item.count }}</p></div>
+           <div>Цена за шт.<p>{{ item.price }}</p></div>
+           <div>Добавить товар<p><i class="fa fa-plus"></i></p></div>
+           <div>Удалить товар<p><i class="fa fa-times"></i></p></div>
         </div>
         <div class="basketTotal">
            Товаров в корзине на сумму:
            $<span class="basketTotalValue">0</span>
         </div>
       </div>
-    `
+    `,
+    mounted() {
+      servise(GOODS_BASKET).then((data) => {
+        this.basketGoodsItems = data;
+        return data;
+      })
+    }
   })
   Vue.component('custom-button', {
     template: `
@@ -72,9 +87,11 @@ window.onload = () => {
       </div>
     `
   })
+
   const app = new Vue({
     el: '#root',
     data: {
+      basketGoodsItems: [],
       items: [],
       searchValue: '',
       isVisibleCart: false,
