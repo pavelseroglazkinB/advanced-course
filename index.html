@@ -56,7 +56,7 @@
                      <img src="images/basket.png">
                      <custom-button v-on:click="addEvent">Корзина</custom-button>
                   </div>
-                  <basket v-if="isVisibleCart" v-on:close="del" v-for="item in basketGoodsItems" :item="item"></basket>
+                  <basket v-if="isVisibleCart" v-on:close="del"></basket>
                </div>
             </div>
          </header>

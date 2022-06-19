@@ -26,8 +26,8 @@ app.get('/basket', (req, res) => {
         readGoods()
     ]).then(([basketList, goodsList]) => {
         return basketList.map((basketItem) => {
-            const goodsItem = goodsList.find(({ id_product: _goodsId }) => {
-                return _goodsId === basketItem.id_product;
+            const goodsItem = goodsList.find(({ id: _goodsId }) => {
+                return _goodsId === basketItem.id;
             });
             return {
                 ...basketItem,
@@ -35,7 +35,7 @@ app.get('/basket', (req, res) => {
             }
         })
     }).then((result) => {
-        console.log(result)
+        res.send(JSON.stringify(result));
     })
 });
 

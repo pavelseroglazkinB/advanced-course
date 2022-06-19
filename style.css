@@ -160,7 +160,8 @@ form{
 
 .delete {
 	position: absolute;
-	right: 20px;
+	right: 10px;
+
 }
 
 @media (min-width: 340px) {
@@ -173,23 +174,12 @@ form{
         width: 500px;
     }
 }
-
-.basketRow {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ebebeb;
-    padding-bottom: 10px;
+th {
+  padding: 10px; 
 }
-
-.basketHeader {
-    font-weight: bold;
-}
-
-.basketTotal {
-    font-weight: bold;
-    text-align: right;
+td {
+  font-size: 1em;
+  padding: 5px 7px;
 }
 
 /*--novelty-starts--*/

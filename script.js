@@ -28,9 +28,6 @@ window.onload = () => {
     `
   })
   Vue.component('basket', {
-    props: [
-      'item'
-    ],
     data() {
       return {
         basketGoodsItems: []
@@ -40,20 +37,27 @@ window.onload = () => {
       <div class="basket hidden">
         <div @click="$emit('close')"><i class="fa fa-times delete"></i></div>
         <div class="basketRow basketHeader">
-           <div>Название товара<p>{{ item.product_name }}</p></div>
-           <div>Количество<p>{{ item.count }}</p></div>
-           <div>Цена за шт.<p>{{ item.price }}</p></div>
-           <div>Добавить товар<p><i class="fa fa-plus"></i></p></div>
-           <div>Удалить товар<p><i class="fa fa-times"></i></p></div>
-        </div>
-        <div class="basketTotal">
-           Товаров в корзине на сумму:
-           $<span class="basketTotalValue">0</span>
+			<table>
+				<tr>
+					<th>Название товара</th>
+					<th>Количество товаров</th>
+                    <th>Цена за шт.</th>
+					<th>Добавить товар</th>
+                    <th>Удалить товар</th>
+				</tr>
+				<tr v-for="item in basketGoodsItems" style="text-align:center;">
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.price }}</td>
+					<td><i class="fa fa-plus"></td>
+					<td><i class="fa fa-times"></td>
+				</tr>
+			</table>
         </div>
       </div>
     `,
     mounted() {
-      servise(GOODS_BASKET).then((data) => {
+      service(GOODS_BASKET).then((data) => {
         this.basketGoodsItems = data;
         return data;
       })
