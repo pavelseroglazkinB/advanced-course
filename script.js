@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:8000/";
+const GOODS_CART = `${BASE_URL}goods`;
 const GOODS = `${BASE_URL}goods.json`;
 const GOODS_BASKET = `${BASE_URL}basket`;
 
@@ -6,7 +7,18 @@ function service(url) {
   return fetch(url)
     .then((res) => res.json());
 }
-
+function serviceWithBody(url = '', method = "POST", body = {}) {
+  return fetch(
+    url,
+    {
+      method,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(body)
+    }
+  ).then((res) => res.json());
+}
 window.onload = () => {
   Vue.component('search', {
     props: {
@@ -37,31 +49,59 @@ window.onload = () => {
       <div class="basket hidden">
         <div @click="$emit('close')"><i class="fa fa-times delete"></i></div>
         <div class="basketRow basketHeader">
-			<table>
-				<tr>
-					<th>Название товара</th>
-					<th>Количество товаров</th>
-                    <th>Цена за шт.</th>
-					<th>Добавить товар</th>
-                    <th>Удалить товар</th>
-				</tr>
-				<tr v-for="item in basketGoodsItems" style="text-align:center;">
-                    <td>{{ item.product_name }}</td>
-                    <td>{{ item.count }}</td>
-                    <td>{{ item.price }}</td>
-					<td><i class="fa fa-plus"></td>
-					<td><i class="fa fa-times"></td>
-				</tr>
-			</table>
+          <div>Название товара</div>
+          <div>Количество</div>
+          <div>Цена за шт.</div>
+          <div>Добавить</div>
+    		  <div>Удалить</div>
+        </div>
+    	  <div>
+          <basket-item
+           v-for="item in basketGoodsItems"
+            class="basketFooter"
+             :item="item"
+              @add='addGood'
+              @removal='removalGood'
+          >
+          </basket-item>
         </div>
       </div>
     `,
     mounted() {
       service(GOODS_BASKET).then((data) => {
         this.basketGoodsItems = data;
-        return data;
       })
+    },
+    methods: {
+      addGood(id) {
+        serviceWithBody(GOODS_BASKET, "POST", {
+          id
+        }).then((data) => {
+          this.basketGoodsItems = data;
+        })
+      },
+      removalGood(id) {
+        serviceWithBody(GOODS_BASKET, "DELETE", {
+          id
+        }).then((data) => {
+          this.basketGoodsItems = data;
+        })
+      }
     }
+  })
+  Vue.component('basket-item', {
+    props: [
+      'item'
+    ],
+    template: `
+    <div>
+      <div>{{ item.product_name }}</div>
+      <div>{{ item.count }}</div>
+      <div>{{ item.price }}</div>
+      <button @click="$emit('add', item.id)"><i class="fa fa-plus"></i></button>
+      <button @click="$emit('removal', item.id)"><i class="fa fa-times"></i></button>
+    </div>
+    `
   })
   Vue.component('custom-button', {
     template: `
@@ -84,12 +124,18 @@ window.onload = () => {
           <div class="catalog-item">{{ item.product_name }}</div>
           <ul class="catalog-item">
             <li class="catalog-item_price"><b>{{ item.price }}</b> руб.</li>
-            <li><a class="add-to-cart-link" href="cart/add?id=3"><img src="images/pannier.png"
-                      alt="pannier"></a></li>
+            <li @click="addGood"><img src="images/pannier.png" alt="pannier"></li>
           </ul>
         </div>
       </div>
-    `
+    `,
+    methods: {
+      addGood() {
+        serviceWithBody(GOODS_BASKET, "POST", {
+          id: this.item.id
+        })
+      }
+    }
   })
 
   const app = new Vue({

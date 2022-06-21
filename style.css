@@ -4,6 +4,7 @@
 }
 body {
 	font-family: "Open Sans";
+
 }
 img {
 	max-width: 100%;
@@ -59,11 +60,6 @@ img {
 	justify-content: space-between;
 }
 
-
-.header_logo{
-	display : flex;
-	justify-content : space-between; /* выравнивание элементов вдоль главной оси*/
-}
 .logo{
 	color : #328F36;
 	font-size : 16px;
@@ -146,7 +142,12 @@ form{
 	position: relative;
 }
 
-.basket {
+.delete {
+	position: absolute;
+	right: 10px;
+
+}
+/*.basket {
     position: absolute;
     z-index: 3;
     right: 0;
@@ -180,8 +181,53 @@ th {
 td {
   font-size: 1em;
   padding: 5px 7px;
+}*/
+.basket {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    top: 37px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    font-size: 1em;
+	text-align: center;
 }
 
+@media (min-width: 340px) {
+    .basket {
+        font-size: 16px;
+    }
+}
+@media (min-width: 552px) {
+    .basket {
+        width: 500px;
+    }
+}
+
+.basketRow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
+}
+
+.basketFooter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
+}
+
+.basketHeader {
+    font-weight: bold;
+
+}
 /*--novelty-starts--*/
 .novelty {
 	margin: auto;
