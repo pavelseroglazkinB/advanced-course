@@ -60,6 +60,14 @@ img {
 	justify-content: space-between;
 }
 
+.logoImages {
+	background-image : url(./images/logo.png);
+	background-size: contain;
+	width: 145px;
+	height: 82px;
+	cursor: pointer;
+}
+
 .logo{
 	color : #328F36;
 	font-size : 16px;
@@ -103,12 +111,12 @@ img {
    padding : 7px 20px;
 }
 .search_img{
-	background : url(images/search.png)no-repeat;
+	background : url(./images/search.png)no-repeat;
     width : 34px;
     height : 34px;
 	border : 0;
 }
-form{
+.form{
 	width:170%;
 	display : flex;
 	justify-content : space-between;
@@ -126,6 +134,20 @@ form{
 
 .header_logo_section:nth-child(1) {
 	margin-bottom: 10px;
+}
+
+.cart {
+	display: flex;
+	/*justify-content : space-between;*/
+}
+
+.basketImg {
+	background-image : url(./images/basket.png);
+	background-size: contain;
+	width: 25px;
+	height: 21px;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .cart a {
@@ -147,41 +169,7 @@ form{
 	right: 10px;
 
 }
-/*.basket {
-    position: absolute;
-    z-index: 3;
-    right: 0;
-    top: 37px;
-    background: white;
-    padding: 10px;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
-    font-size: 14px;
-}
 
-.delete {
-	position: absolute;
-	right: 10px;
-
-}
-
-@media (min-width: 340px) {
-    .basket {
-        font-size: 16px;
-    }
-}
-@media (min-width: 552px) {
-    .basket {
-        width: 500px;
-    }
-}
-th {
-  padding: 10px; 
-}
-td {
-  font-size: 1em;
-  padding: 5px 7px;
-}*/
 .basket {
     position: absolute;
     z-index: 3;
@@ -251,6 +239,7 @@ td {
 
 .grid-item {
 	margin-bottom: 40px;
+
 	flex: 0 1 calc(25% - 1.5%);
 }
 
@@ -259,6 +248,21 @@ td {
 	height: auto;
 	display: block;
 	margin-bottom: 14px;
+}
+
+.gridImg {
+	background-image : url(./images/26.jpg);
+	background-size: contain;
+	width: 250px;
+	height: 300px;
+
+}
+
+.pannier {
+	background-image : url(./images/pannier.png);
+	background-size: contain;
+	width: 35px;
+	height: 34px;
 }
 
 .product_catalog {
